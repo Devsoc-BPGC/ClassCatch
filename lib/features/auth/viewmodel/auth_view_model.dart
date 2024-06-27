@@ -5,8 +5,13 @@ class AuthViewModel {
 
   AuthViewModel(this._authService);
 
-  Future<void> signInWithGoogle() async {
-    await _authService.signInWithGoogle();
+  Future<String?> signInWithGoogle() async {
+    try {
+      await _authService.signInWithGoogle();
+      return null;
+    } catch (e) {
+      return e.toString();
+    }
   }
 
   Future<void> signOut() async {

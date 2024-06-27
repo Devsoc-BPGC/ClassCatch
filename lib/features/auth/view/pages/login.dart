@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginPage extends ConsumerWidget {
-  const LoginPage({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
@@ -12,7 +10,7 @@ class LoginPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text('Login'),
       ),
       body: user.when(
         data: (user) {
@@ -26,12 +24,12 @@ class LoginPage extends ConsumerWidget {
                       backgroundImage: NetworkImage(user.photoUrl!),
                       radius: 40,
                     ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   Text('Logged in as ${user.displayName ?? user.email}'),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () => authViewModel.signOut(),
-                    child: const Text('Sign Out'),
+                    child: Text('Sign Out'),
                   ),
                 ],
               ),
@@ -39,15 +37,20 @@ class LoginPage extends ConsumerWidget {
           } else {
             return Center(
               child: ElevatedButton(
-                onPressed: () {
-                  authViewModel.signInWithGoogle();
+                onPressed: () async {
+                  final error = await authViewModel.signInWithGoogle();
+                  if (error != null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(error)),
+                    );
+                  }
                 },
-                child: const Text('Login with BITS'),
+                child: Text('Login with Google'),
               ),
             );
           }
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () => Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text('Error: $error')),
       ),
     );

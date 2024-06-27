@@ -1,6 +1,7 @@
 import 'package:class_catch/features/auth/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:class_catch/core/secrets/auth_secrets.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -10,16 +11,24 @@ class AuthService {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        return null;
+        return null; 
       }
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final email = googleUser.email;
+      if (!isEmailPermitted(email)) {
+        await _googleSignIn.signOut();
+        throw Exception('Please use BITSMail to login.');
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
       User? user = userCredential.user;
       if (user != null) {
         return UserModel(
@@ -34,6 +43,15 @@ class AuthService {
       print(e);
       return null;
     }
+  }
+
+  bool isEmailPermitted(String email) {
+    for (String domain in AuthSecrets.permittedEmails) {
+      if (email.endsWith(domain)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   Future<void> signOut() async {
