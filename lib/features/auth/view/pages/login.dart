@@ -1,15 +1,12 @@
-import 'package:class_catch/features/auth/viewmodel/auth_view_model.dart';
+import 'package:class_catch/features/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
+class LoginPage extends ConsumerWidget {
+  const LoginPage({super.key});
 
-class _LoginPageState extends ConsumerState<LoginPage> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
     final authViewModel = ref.read(authViewModelProvider);
 
@@ -45,7 +42,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 onPressed: () {
                   authViewModel.signInWithGoogle();
                 },
-                child: const Text('Login with Google'),
+                child: const Text('Login with BITS'),
               ),
             );
           }
