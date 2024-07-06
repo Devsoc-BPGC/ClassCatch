@@ -76,8 +76,9 @@ flutter:
 
     - assets/menu.svg
     - assets/done_button.svg
-    - assets/bg_new.svg
     - assets/bg_lat.svg
+    - assets/CGPA.svg
+    - assets/CGPA_new.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

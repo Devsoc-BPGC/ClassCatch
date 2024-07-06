@@ -1,5 +1,5 @@
 import 'package:class_catch/features/cgpa_calculator/course_meta_data.dart';
-import 'package:class_catch/features/cgpa_calculator/dropdown.dart';
+import 'package:class_catch/features/cgpa_calculator/services/dropdown_wo_search.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,7 +13,6 @@ class CgpaCalculatorScreen extends StatefulWidget {
 }
 
 class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
-  String? _selectedvalue;
   List<String> cdcnames = compulsoryCoursesList.map((map) => map['courseTitle'].toString()).toList();
   double cgpa = 7.58;
   double sgpa = 8.51;
@@ -22,7 +21,7 @@ class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          SvgPicture.asset('assets/bg_new.svg',fit: BoxFit.cover,),
+          SvgPicture.asset('assets/CGPA_new.svg',fit: BoxFit.cover,),
 
           SafeArea(
             child: Column(
@@ -30,12 +29,12 @@ class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.only(top: 10,left: 18),
+                  padding: const EdgeInsets.only(top: 10,left: 18),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SvgPicture.asset('assets/menu.svg'),
-                      SizedBox(width: 20,),
+                      const SizedBox(width: 20,),
                       Text('CGPA Calculator',
                         style: GoogleFonts.lexend(
                             fontSize: 24
@@ -46,7 +45,7 @@ class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
                 ),
                 Container(
                   height: 150,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.transparent
                   ),
                   child: Row(
@@ -59,24 +58,24 @@ class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
                         radius: 60,
                         lineWidth: 9,
                         percent: (cgpa/10),
-                        progressColor: Color.fromARGB(255, 0, 190, 87),
-                        backgroundColor: Color.fromARGB(255, 217, 217, 217),
+                        progressColor: const Color.fromARGB(255, 0, 190, 87),
+                        backgroundColor: const Color.fromARGB(255, 217, 217, 217),
                         circularStrokeCap: CircularStrokeCap.round,
                         center: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Spacer(flex: 1,),
+                            const Spacer(flex: 1,),
                             Text('CGPA',
                             style: GoogleFonts.lexend(
                               fontSize: 16,
-                              color: Color.fromARGB(255, 132, 122, 122)
+                              color: const Color.fromARGB(255, 132, 122, 122)
                             ),),
                             Text(cgpa.toString(),
                             style: GoogleFonts.lexend(
                               fontSize: 36,
                               fontWeight: FontWeight.bold
                             ),),
-                            Spacer(flex: 2,)
+                            const Spacer(flex: 2,)
                           ],
                         ),
                       ),
@@ -86,24 +85,24 @@ class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
                         radius: 60,
                         lineWidth: 9,
                         percent: (sgpa/10),
-                        progressColor: Color.fromARGB(255, 0, 190, 87),
-                        backgroundColor: Color.fromARGB(255, 217, 217, 217),
+                        progressColor: const Color.fromARGB(255, 0, 190, 87),
+                        backgroundColor: const Color.fromARGB(255, 217, 217, 217),
                         circularStrokeCap: CircularStrokeCap.round,
                         center: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Spacer(flex: 1,),
+                            const Spacer(flex: 1,),
                             Text('SGPA',
                               style: GoogleFonts.lexend(
                                   fontSize: 16,
-                                  color: Color.fromARGB(255, 132, 122, 122)
+                                  color: const Color.fromARGB(255, 132, 122, 122)
                               ),),
                             Text(sgpa.toString(),
                               style: GoogleFonts.lexend(
                                   fontSize: 36,
                                   fontWeight: FontWeight.bold
                               ),),
-                            Spacer(flex: 2,)
+                            const Spacer(flex: 2,)
                           ],
                         ),
                       ),
@@ -111,68 +110,35 @@ class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Center(
-                  child: Container(
-                    height: 40,
-                    width: 310,
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 35, 35, 35),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        border: Border.all(
-                            color: Color.fromARGB(255, 53, 53, 53)
-                        )
-                    ),
-                    child: Dropdown(list: semesterList,),
-                  ),
+                  child: DropdownWoSearch(list: semesterList,text: 'Choose Semester',)
                 ),
-                SizedBox(height: 35,),
+                const SizedBox(height: 35,),
                 Center(
-                  child: Container(
-                    height: 40,
-                    width: 310,
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 35, 35, 35),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        border: Border.all(
-                            color: Color.fromARGB(255, 53, 53, 53)
-                        )
-                    ),
-                    child: Dropdown(list: cdcnames,),
-                  ),
+                  child: DropdownWoSearch(list: cdcnames,text: 'Choose Course',),
                 ),
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Center(
-                  child: Container(
-                    height: 40,
-                    width: 310,
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 35, 35, 35),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        border: Border.all(
-                            color: Color.fromARGB(255, 53, 53, 53)
-                        )
-                    ),
-                    child: Dropdown(list: gradesList,)
-                  ),
+                  child: DropdownWoSearch(list: gradesList,text: 'Choose Grade',),
                 ),
-                SizedBox(height: 40,),
+                const SizedBox(height: 40,),
                 Center(
                   child: Container(
                     height: 100,
                     width: 310,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 35, 35, 35),
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: const Color.fromARGB(255, 35, 35, 35),
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
                         border: Border.all(
-                            color: Color.fromARGB(255, 53, 53, 53)
+                            color: const Color.fromARGB(255, 53, 53, 53)
                         )
                     ),
                   ),
                 ),
-                SizedBox(height: 28,),
+                const SizedBox(height: 28,),
                 Padding(
-                    padding: EdgeInsets.only(bottom: 31,left: 10,right: 10),
+                    padding: const EdgeInsets.only(bottom: 31,left: 10,right: 10),
                     child: GestureDetector(
                       onTap: (){
                           showGeneralDialog(
