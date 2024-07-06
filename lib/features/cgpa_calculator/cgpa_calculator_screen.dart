@@ -21,7 +21,7 @@ class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          SvgPicture.asset('assets/CGPA_new.svg',fit: BoxFit.cover,),
+          SvgPicture.asset('assets/CGPA.svg',fit: BoxFit.cover,),
 
           SafeArea(
             child: Column(
@@ -140,14 +140,7 @@ class _CgpaCalculatorScreenState extends State<CgpaCalculatorScreen> {
                 Padding(
                     padding: const EdgeInsets.only(bottom: 31,left: 10,right: 10),
                     child: GestureDetector(
-                      onTap: (){
-                          showGeneralDialog(
-                              barrierDismissible: true,
-                              barrierLabel: 'Select Your Grades',
-                              context: context,
-                              pageBuilder: (context,_,__) => Container()
-                          );
-                      },
+                      onTap: (){},
                       child: SvgPicture.asset('assets/done_button.svg'),
                     ),
                   ),
