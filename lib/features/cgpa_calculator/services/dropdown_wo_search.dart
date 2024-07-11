@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class DropdownWoSearch extends StatefulWidget {
   final List<String> list;
-   final String text;
+  final String text;
   const DropdownWoSearch({super.key, required this.list,required this.text});
 
   @override
@@ -19,11 +19,14 @@ class _DropdownWoSearchState extends State<DropdownWoSearch> {
   String? _selectedvalue;
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return DropdownButtonHideUnderline(
       child: DropdownButton2<String>(
         isExpanded: true,
         hint: Padding(
-          padding: const EdgeInsets.fromLTRB(15, 8, 8, 8),
+          padding: const EdgeInsets.fromLTRB(15, 5, 5, 8),
           child: Text(text,
             style: GoogleFonts.lexend(
                 fontSize: 12,
@@ -44,12 +47,12 @@ class _DropdownWoSearchState extends State<DropdownWoSearch> {
           });
         },
         buttonStyleData: ButtonStyleData(
-            height: 40,
-            width: 310,
+            height: 0.045 * screenHeight,
             decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 35, 35, 35),
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 border: Border.all(
+                  width: 2,
                     color: const Color.fromARGB(255, 53, 53, 53)
                 )
             ),
@@ -57,16 +60,18 @@ class _DropdownWoSearchState extends State<DropdownWoSearch> {
         ),
         iconStyleData: const IconStyleData(
             icon: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.only(right: 8.0),
               child: Icon(
-                Icons.keyboard_arrow_down_sharp,
+                Icons.keyboard_arrow_down,
+                color: Colors.white,
+                size: 24
               ),
             ),
             iconSize: 20
         ),
         dropdownStyleData: DropdownStyleData(
           maxHeight: 300,
-          width: 310,
+          width: 0.9 * screenWidth,
           decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               color: const Color(0xFF232323),
