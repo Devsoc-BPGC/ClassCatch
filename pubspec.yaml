@@ -73,12 +73,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-
-    - assets/menu.svg
-    - assets/done_button.svg
-    - assets/bg_lat.svg
-    - assets/CGPA.svg
-    - assets/CGPA_new.svg
+    - assets/cgpa_calculator/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
