@@ -8,6 +8,7 @@ class DropdownWoSearch extends StatefulWidget {
   const DropdownWoSearch({super.key, required this.list,required this.text});
 
   @override
+  // ignore: no_logic_in_create_state
   State<DropdownWoSearch> createState() => _DropdownWoSearchState(list: list,text: text);
 }
 

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginPage extends ConsumerWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
@@ -10,7 +12,7 @@ class LoginPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: user.when(
         data: (user) {
@@ -24,12 +26,12 @@ class LoginPage extends ConsumerWidget {
                       backgroundImage: NetworkImage(user.photoUrl!),
                       radius: 40,
                     ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text('Logged in as ${user.displayName ?? user.email}'),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () => authViewModel.signOut(),
-                    child: Text('Sign Out'),
+                    child: const Text('Sign Out'),
                   ),
                 ],
               ),
@@ -40,17 +42,18 @@ class LoginPage extends ConsumerWidget {
                 onPressed: () async {
                   final error = await authViewModel.signInWithGoogle();
                   if (error != null) {
+                    // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(error)),
                     );
                   }
                 },
-                child: Text('Login with Google'),
+                child: const Text('Login with Google'),
               ),
             );
           }
         },
-        loading: () => Center(child: CircularProgressIndicator()),
+        loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text('Error: $error')),
       ),
     );

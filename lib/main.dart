@@ -1,5 +1,4 @@
-import 'package:class_catch/features/auth/view/pages/login.dart';
-import 'package:class_catch/features/cgpa_calculator/cgpa_calculator_screen.dart';
+import 'package:class_catch/features/pomodoro_timer/pomodoro.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: CgpaCalculatorScreen(),
+      home: const PomodoroTimer(),
     );
   }
 }
